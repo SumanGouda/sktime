@@ -125,6 +125,8 @@ class HyperTreeARForecaster(BaseForecaster):
                 freq = pd.infer_freq(y.index)
             except ValueError:
                 freq = None
+        if freq == "M":
+            freq = "ME"
         self._freq = freq or "MS"
         fcst_h = int(np.max(fh.to_relative(self.cutoff)._values))
         self._dates = pd.date_range(
